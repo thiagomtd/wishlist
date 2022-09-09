@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
+import Wishlist from './components/Wishlist'
 
-function App() {
+import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react'
+import '@aws-amplify/ui-react/styles.css'
+
+function App({ signOut, user }) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <div className='header'>
+        <Button
+          variation='primary'
+          size='small'
+          loadingText=''
+          onClick={signOut}
+          ariaLabel=''>
+          Sign out
+        </Button>
+      </div>
+      <div className='wishlist-app'>
+        <Wishlist user={user} />
+      </div>
+    </>
+  )
 }
 
-export default App;
+export default withAuthenticator(App)
